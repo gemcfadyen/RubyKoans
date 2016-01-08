@@ -28,9 +28,40 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 # More scoring examples are given in the tests below:
 #
 # Your goal is to write the score method.
+def three_matching(range, dice)
+  total_for_triple_match = 0
+  range.each { |n| 
+    if dice.count(n) >= 3
+      if n == 1 
+        total_for_triple_match = 1000
+      else
+        total_for_triple_match = 100 * n
+      end
+
+      (0...3).each do  
+        index_of_n = dice.index(n)
+        dice.delete_at(index_of_n)
+      end
+      break
+    end
+  }
+  total_for_triple_match
+end
 
 def score(dice)
   # You need to write this method
+  total = 0
+  total+= three_matching((1..1), dice)
+  total+= three_matching((2..6), dice)
+
+  dice.each do |roll| 
+    if roll == 5 
+      total += 50
+    elsif roll == 1
+      total +=100 
+    end
+  end
+  total
 end
 
 class AboutScoringProject < Neo::Koan
