@@ -14,6 +14,17 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
+
+  if a <= 0 or b <= 0 or c <= 0 
+    raise TriangleError
+  end
+
+  # To experiment with methods, I've extracted one out here 
+  result =  adding_two_sides_are_less_than_third_side(a, b, c)
+  if result == true
+    raise TriangleError
+  end
+
   if  (a == b and b == c)  
     puts 'TRUE'
     :equilateral
@@ -21,7 +32,17 @@ def triangle(a, b, c)
     :isosceles
   else
     :scalene
-    end
+  end
+end
+
+def adding_two_sides_are_less_than_third_side(a, b, c)
+  if a+b <= c or a + c <= b or c+b <= a 
+    puts "There is a problemo! "
+    true 
+  else
+    puts "No problemo! "
+    false
+  end
 end
 
 # Error class used in part 2.  No need to change this code.
